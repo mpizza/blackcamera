@@ -44,7 +44,7 @@ navigator.getMedia = ( navigator.getUserMedia ||
                        navigator.mozGetUserMedia ||
                        navigator.msGetUserMedia);
 
-if (navigator.getMedia.name) {
+if (navigator.getMedia) {
   $('#take-picture-bt').addClass('webRTC');
   $('#content').addClass('webRTC');
 } else {
@@ -79,7 +79,7 @@ function stopIT(localMediaStream){
 }
 $(function(){
   $('#take-picture-bt').click(function(){
-    if (navigator.getMedia.name){
+    if (navigator.getMedia){
       cameraPanel.canvasPad.style.display = 'none';
       navigator.getMedia (
         { video: true },
