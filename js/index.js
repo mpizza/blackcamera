@@ -41,7 +41,7 @@ var glossary = [{text:'報告學長，沒有畫面',
                  
 $(function(){
   $('#take-picture-bt').click(function(){
-    //$('#take-picture').click();
+    $('#take-picture').click();
     $(this).addClass('retake');
     cameraPanel.draw();
   });
