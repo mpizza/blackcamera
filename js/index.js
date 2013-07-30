@@ -44,7 +44,7 @@ navigator.getMedia = ( navigator.getUserMedia ||
                        navigator.mozGetUserMedia ||
                        navigator.msGetUserMedia);
 
-if (navigator.getMedia) {
+if (typeof(navigator.getMedia) != "undefined") {
   $('#take-picture-bt').addClass('webRTC');
   $('#content').addClass('webRTC');
 } else {
