@@ -101,10 +101,10 @@ $(function(){
       );
     } else {
       $('#take-picture').click();
-      $(this).addClass('retake');  
     }
   });
   $('#take-picture').change(function(event){
+    $(this).addClass('retake');  
     cameraPanel.draw();
   });
 });
