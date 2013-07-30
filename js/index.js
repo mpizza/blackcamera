@@ -43,7 +43,6 @@ $(function(){
   $('#take-picture-bt').click(function(){
     $('#take-picture').click();
     $(this).addClass('retake');
-    cameraPanel.draw();
   });
   $('#take-picture').change(function(event){
     cameraPanel.draw();
