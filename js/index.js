@@ -39,12 +39,73 @@ var glossary = [{text:'報告學長，沒有畫面',
                  posY:480,
                  style:'56px san-serif'}];
                  
+navigator.getMedia = ( navigator.getUserMedia ||
+                       navigator.webkitGetUserMedia ||
+                       navigator.mozGetUserMedia ||
+                       navigator.msGetUserMedia);
+
+if (navigator.getMedia) {
+  $('#take-picture-bt').addClass('webRTC');
+  $('#content').addClass('webRTC');
+} else {
+  var video = document.getElementById('videoPanel');
+  video.style.display = 'none';
+}
+
+function stopIT(localMediaStream){
+  var i = 3;
+  var countDown = document.getElementById('countdown');
+  countDown.style.display = 'block';
+  var timestamp = setInterval(function(){
+    if (i <= 0) {
+      window.clearInterval(timestamp);
+      var video = document.getElementById('videoPanel');
+      video.style.display = 'none';
+      video.pause();
+      video.src = null;
+      localMediaStream.stop();
+      localMediaStream=null;
+      timestamp = null;
+      cameraPanel.canvasPad.style.display = 'block';
+      countDown.style.display = 'none';
+      cameraPanel.draw();
+      countDown.innerHTML = null;
+    } else {
+      countDown.innerHTML = i;
+    } 
+    i-=1;
+    
+  }, 1000)
+}
 $(function(){
   $('#take-picture-bt').click(function(){
-    $('#take-picture').click();
-    $(this).addClass('retake');
+    if (navigator.getMedia){
+      cameraPanel.canvasPad.style.display = 'none';
+      navigator.getMedia (
+        { video: true },
+        // successCallback
+        function(localMediaStream) {
+          var video = document.getElementById('videoPanel');
+          video.src = window.URL.createObjectURL(localMediaStream);
+          video.style.display = 'block';
+          stopIT(localMediaStream);
+          video.onloadedmetadata = function(e) {
+             //video.play();
+             //stopIT(localMediaStream);
+          };
+        },
+        // errorCallback
+        function(err) {
+          console.log("The following error occured: " + err);
+        }
+      );
+    } else {
+      $('#take-picture').click();
+      $(this).addClass('retake');  
+    }
   });
   $('#take-picture').change(function(event){
     cameraPanel.draw();
   });
 });
+
