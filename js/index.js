@@ -43,14 +43,22 @@ navigator.getMedia = ( navigator.getUserMedia ||
                        navigator.webkitGetUserMedia ||
                        navigator.mozGetUserMedia ||
                        navigator.msGetUserMedia);
-
-if (navigator.getMedia) {
-  $('#take-picture-bt').addClass('webRTC');
-  $('#content').addClass('webRTC');
-} else {
-  var video = document.getElementById('videoPanel');
-  video.style.display = 'none';
-}
+var cameraSupport = false;
+navigator.getMedia (
+  { video: true },
+  function(localMediaStream){
+    $('#take-picture-bt').addClass('webRTC');
+    $('#content').addClass('webRTC');
+    localMediaStream.stop();
+    localMediaStream = null;
+    cameraSupport = true;
+  },
+  function(err){
+    var video = document.getElementById('videoPanel');
+    video.style.display = 'none';
+    cameraSupport = false;
+  }
+);
 
 function stopIT(localMediaStream){
   var i = 3;
@@ -79,7 +87,7 @@ function stopIT(localMediaStream){
 }
 $(function(){
   $('#take-picture-bt').click(function(){
-    if (navigator.getMedia){
+    if (cameraSupport){
       cameraPanel.canvasPad.style.display = 'none';
       navigator.getMedia (
         { video: true },
