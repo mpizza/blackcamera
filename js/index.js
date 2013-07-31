@@ -44,21 +44,27 @@ navigator.getMedia = ( navigator.getUserMedia ||
                        navigator.mozGetUserMedia ||
                        navigator.msGetUserMedia);
 var cameraSupport = false;
-navigator.getMedia (
-  { video: true },
-  function(localMediaStream){
-    $('#take-picture-bt').addClass('webRTC');
-    $('#content').addClass('webRTC');
-    localMediaStream.stop();
-    localMediaStream = null;
-    cameraSupport = true;
-  },
-  function(err){
-    var video = document.getElementById('videoPanel');
-    video.style.display = 'none';
-    cameraSupport = false;
-  }
-);
+if (!navigator.getMedia) {
+  var video = document.getElementById('videoPanel');
+  video.style.display = 'none';
+  cameraSupport = false;
+} else {
+  navigator.getMedia (
+    { video: true },
+    function(localMediaStream){
+      $('#take-picture-bt').addClass('webRTC');
+      $('#content').addClass('webRTC');
+      localMediaStream.stop();
+      localMediaStream = null;
+      cameraSupport = true;
+    },
+    function(err){
+      var video = document.getElementById('videoPanel');
+      video.style.display = 'none';
+      cameraSupport = false;
+    }
+  );
+}
 
 function stopIT(localMediaStream){
   var i = 3;
