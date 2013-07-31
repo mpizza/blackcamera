@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "name": "Black Camera",
+  "description": "Black Camera",
+  "launch_path": "/blackcamera/index.html",
+  "developer": {
+    "name": "Gary Chen(PYChen)",
+    "url": "https://github.com/mpizza/"
+  },
+  "orientation": "portrait-primary",
+  "locales": {
+    "en-US": {
+      "name": "Black Camera",
+      "description": "Magice Cmaera"
+    },
+    "zh-TW": {
+      "name": "國防部相機 HTML5版",
+      "description": "第一個跨平台的國防部相機，支援Android, iPhone ,Firefox OS及WebRTC(getUserMedia)"
+    }
+  },
+  "default_locale": "en-US",
+  "icons": {
+    "60": "/blackcamera/style/icons/camera_60.png",
+    "128": "/blackcamera/style/icons/camera_128.png"
+  }
+}
