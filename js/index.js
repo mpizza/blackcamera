@@ -104,7 +104,7 @@ $(function(){
     }
   });
   $('#take-picture').change(function(event){
-    $(this).addClass('retake');  
+    $('#take-picture-bt').addClass('retake');  
     cameraPanel.draw();
   });
 });
