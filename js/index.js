@@ -95,7 +95,11 @@ var glossary = [
                   posX:30,
                   posY:480,
                   style:'44px san-serif'},
-];
+                {text:'沒有畫面，BJ4!',
+                 posX:120,
+                 posY:480,
+                 style:'56px san-serif'}];
+
                  
 navigator.getMedia = ( navigator.getUserMedia ||
                        navigator.webkitGetUserMedia ||
